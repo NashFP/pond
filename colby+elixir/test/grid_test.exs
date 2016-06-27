@@ -12,7 +12,7 @@ defmodule PondGridTest do
     neighbors = Grid.create_neighbor_coords(20, 20)
     assert neighbors == [
       [19, 19], [19, 20], [19, 21],
-      [20, 19], [20, 20], [20, 21],
+      [20, 19],           [20, 21],
       [21, 19], [21, 20], [21, 21]
     ]
   end
@@ -26,10 +26,10 @@ defmodule PondGridTest do
 
   test "fetch adjacent" do
     neighbors = Grid.fetch_adjacent(30, 30)
-    assert Enum.count(neighbors) == 9
+    assert Enum.count(neighbors) == 8
 
     edge_neighbors = Grid.fetch_adjacent(0, 30)
-    assert Enum.count(edge_neighbors) == 6
+    assert Enum.count(edge_neighbors) == 5
   end
 
 end

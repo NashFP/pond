@@ -2,6 +2,10 @@ defmodule Pond do
 
   alias Pond.Entity
   alias Pond.Grid
+  alias Pond.Printer
+
+  @frogs 300
+  @turtles 300
 
   def rand_empty_spot() do
     x = :random.uniform(64) - 1
@@ -19,17 +23,25 @@ defmodule Pond do
   end
 
   def add_frogs() do
-    Enum.map(1..3000, fn(_) -> add_entity(:frog) end)
+    Enum.map(1..@frogs, fn(_) -> add_entity(:frog) end)
   end
 
   def add_turtles() do
-    Enum.map(1..3000, fn(_) -> add_entity(:turtle) end)
+    Enum.map(1..@turtles, fn(_) -> add_entity(:turtle) end)
   end
+
   
   def main do
     Grid.start_link
+    Printer.start_link
     frogs = add_frogs
     turtles = add_turtles
+    Pond.Printer.print
+    loop
   end
 
+  def loop do
+    Process.sleep(30)
+    loop
+  end
 end
