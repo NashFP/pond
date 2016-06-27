@@ -15,7 +15,7 @@ defmodule Pond do
   def add_entity(type) do
     [x, y] = rand_empty_spot
     Grid.set_at(x, y, type)
-    Entity.start_link(%{type: type, x: x, y: y})
+    Entity.start_link({type, x, y})
   end
 
   def add_frogs() do
