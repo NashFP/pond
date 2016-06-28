@@ -1,10 +1,11 @@
 defmodule Pond.Grid do
-  @x_size 80
-  @y_size 30
+  @x_size 128
+  @y_size 64 
+
   defp empty_row do
     Enum.map(1..@x_size, fn _ -> :empty end)
   end
-  
+
   defp empty_grid do
     Enum.map(1..@y_size, fn _ -> empty_row end)
   end
@@ -60,6 +61,7 @@ defmodule Pond.Grid do
       |> Enum.map(fn ([x, y]) -> {x, y, do_fetch_at(grid, x, y)} end)
       |> Enum.filter(&(elem(&1, 2) == :empty))
       |> Enum.random
+      |> Tuple.delete_at(2)
     end)
   end
 

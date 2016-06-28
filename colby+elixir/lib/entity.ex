@@ -16,7 +16,7 @@ defmodule Pond.Entity do
 
   def do_move(count, type, x, y) when count > 3, do: {type, x, y}
   def do_move(count, type, x, y) do
-    {a, b, :empty} = Grid.fetch_random_empty_space(x, y)
+    {a, b} = Grid.fetch_random_empty_space(x, y)
     Grid.set_at(x, y, :empty)
     Grid.set_at(a, b, type)
     {type, a, b}
@@ -29,7 +29,6 @@ defmodule Pond.Entity do
     count = neighbors |> Enum.filter(&(&1 == type)) |> length
     new_state = do_move(count, type, x, y)
     GenServer.cast(self, :move)
-    Pond.Printer.print
     {:noreply, new_state}
   end
 end

@@ -4,8 +4,8 @@ defmodule Pond do
   alias Pond.Grid
   alias Pond.Printer
 
-  @frogs 300
-  @turtles 300
+  @frogs 3000
+  @turtles 3000
 
   def rand_empty_spot() do
     x = :random.uniform(64) - 1
@@ -41,7 +41,8 @@ defmodule Pond do
   end
 
   def loop do
-    Process.sleep(30)
+    Process.sleep(80)
+    Pond.Printer.print
     loop
   end
 end
